@@ -4,16 +4,16 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     users = User.all
-    render json: users, each_serializer: UserSerializer
+    render json: users, each_serializer: UserPostSerializer
   end
 
   def show
-    render json: @user, serializer: UserSerializer
+    render json: @user, serializer: UserPostSerializer
   end
 
   def update
     if @user.update(user_params)
-      render status: 200, json: @user, serializer: UserSerializer
+      render status: 200, json: @user, serializer: UserPostSerializer
     else
       render status: 400, json: { data: @user.errors }
     end

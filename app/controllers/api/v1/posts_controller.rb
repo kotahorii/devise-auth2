@@ -3,8 +3,8 @@ class Api::V1::PostsController < ApplicationController
   before_action :set_post, except:[:index, :create]
 
   def index
-    posts = Post.all
-    render json: { data: posts }
+    @posts = Post.preload(:user)
+    render json: @posts, each_serializer: PostSerializer
   end
 
   def show
